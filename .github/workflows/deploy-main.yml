@@ -16,11 +16,12 @@ jobs:
 
       - name: Run deploy script
         run: |
-          ssh azure-qa@40.78.145.27 -A
+          ssh azure-qa@40.78.145.27
+          sudo su
           cd ../..
           cd /opt
-          sudo cat abc.txt
-          sudo cd ./qa_automation/qa-automation-tool
+          cat abc.txt
+          cd ./qa_automation/qa-automation-tool
           git pull origin main
           echo "Deployment Start"
           /bin/bash deploy.sh
