@@ -18,7 +18,9 @@ jobs:
         run: |
           ssh azure-qa@40.78.145.27
           cd /../..
-          cd /opt/qa_automation/qa-automation-tool/
+          cd /opt
+          cd /qa_automation
+          cd /qa-automation-tool/
           git pull origin main
           echo "Deployment Start"
           /bin/bash deploy.sh
