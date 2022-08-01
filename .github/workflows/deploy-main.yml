@@ -21,8 +21,7 @@ jobs:
       - run: cd ../../opt/qa_automation/qa-automation-tool
 
       - name: Run deploy script
-      - run: |
-          git pull origin main
-          echo "Deployment Start"
-          /bin/bash deploy.sh
-          echo "Deployment completed successfully!"
+      - run: git pull origin main
+      - run: echo "Deployment Start"
+      - run: /bin/bash deploy.sh
+      - run: echo "Deployment completed successfully!"
