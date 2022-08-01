@@ -19,7 +19,8 @@ jobs:
           ssh azure-qa@40.78.145.27 -A
           cd ../..
           cd /opt
-          cd ./qa_automation/qa-automation-tool
+          cat abc.txt
+          sudo cd ./qa_automation/qa-automation-tool
           git pull origin main
           echo "Deployment Start"
           /bin/bash deploy.sh
