@@ -17,7 +17,6 @@ jobs:
       - name: Run deploy script
         run: |
           ssh root@40.78.145.27
-          cd ../..
           cd /opt
           cat abc.txt
           cd ./qa_automation/qa-automation-tool
