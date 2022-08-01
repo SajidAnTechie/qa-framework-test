@@ -17,6 +17,7 @@ jobs:
       - name: Run deploy script
         run: |
           ssh azure-qa@40.78.145.27
+          pwd
           cd ../..
           cd /opt
           cd ./qa_automation/qa-automation-tool
