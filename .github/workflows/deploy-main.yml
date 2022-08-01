@@ -15,13 +15,12 @@ jobs:
           known_hosts: ${{ secrets.QA_AUTOMATION_KNOWN_HOSTS }}
 
       - name: Run deploy script
-        run: |
-          ssh azure-qa@40.78.145.27
-          cd ../..
-          ls --all
-          cd /opt
-          cd ./qa_automation/qa-automation-tool
-          git pull origin main
-          echo "Deployment Start"
-          /bin/bash deploy.sh
-          echo "Deployment completed successfully!"
+        run: ssh azure-qa@40.78.145.27
+
+      - run: cd ../..
+      - run: cd /opt
+      - run: cd ./qa_automation/qa-automation-tool
+      - run: git pull origin main
+      - run: echo "Deployment Start"
+      - run: /bin/bash deploy.sh
+      - run: echo "Deployment completed successfully!"
