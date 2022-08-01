@@ -1,0 +1,69 @@
+version: '3'
+services:
+  webapi:
+    container_name: qa_automation_webapi
+    build:
+      dockerfile: dockerfile.webapi
+      context: ./
+    command: npm run start
+    env_file:
+      - .env
+    ports:
+      - "${WEBAPI_PORT}:${WEBAPI_PORT}"
+    expose:
+      - ${WEBAPI_PORT}
+    environment:
+      NODE_ENV: development
+    depends_on:
+      redis:
+        condition: service_healthy
+  framework-client:
+    container_name: framework-client
+    build:
+      dockerfile: dockerfile.client
+      context: ./
+    command: npm run start
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: development
+    depends_on:
+      redis:
+        condition: service_healthy
+  redis:
+    container_name: qa_automation_redis
+    image: redis:6.2-alpine
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '${REDIS_PORT}:${REDIS_PORT}'
+    command: redis-server --port ${REDIS_PORT} --loglevel warning
+    volumes:
+      - redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-p", "${REDIS_PORT}", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+  selenium-hub:
+    image: selenium/hub:4.1.4
+    container_name: selenium-hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+  chrome:
+    image: selenium/node-chrome:4.1.4
+    shm_size: 2gb
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+      - SE_NODE_MAX_INSTANCES=${SELENIUM_MAX_INSTANCES}
+      - SE_NODE_MAX_SESSIONS=${SELENIUM_MAX_INSTANCES}
+      - SE_NODE_SESSION_TIMEOUT=300
+volumes:
+  redis:
+    driver: local

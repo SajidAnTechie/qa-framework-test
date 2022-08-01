@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Automated Testing Website</title>
+  </head>
+  <body>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="wait.html">Wait</a></li>
+      <!-- <li><a href="contact.html">Contact</a></li>
+      <li><a href="about.html">About</a></li> -->
+    </ul>
+      <!-- Selectors example section -->
+    <h1>This is wait screen</h1>
+    <div id="download-container">
+    </div>
+
+    <!-- test dynamic content -->
+    <div data-dyn-count="4" data-dyn-target-name="data-dyn-checkbox">
+      <input type="checkbox" data-dyn-checkbox-1="data-dyn-checkbox-1">checkbox 1</input>
+      <input type="checkbox" data-dyn-checkbox-2="data-dyn-checkbox-2">checkbox 2</input>
+      <input type="color" data-dyn-checkbox-3="data-dyn-checkbox-3">checkbox 3</input>
+      <input type="radio" data-dyn-checkbox-4="data-dyn-checkbox-4">checkbox 4</input>
+    </div>
+
+    </div>
+    <script>
+      function changeTitle() {
+        setTimeout(() => {
+          document.title = "Changed title after 2 seconds";
+        }, 1000);
+      }
+      function navigateToHomePage() {
+        setTimeout(() => {
+          document.location.href = "http://localhost:5500/website/index.html";
+        }, 1000 * 10);
+      }
+      function updateDownloadText() {
+        setTimeout(() => {
+          document.getElementById("download-container").innerHTML = `<p id="download-text">Your Download is Ready</p>`;
+        }, 3000);
+      }
+      changeTitle();
+      navigateToHomePage()
+      updateDownloadText();
+      </script>
+  </body>
+</html>

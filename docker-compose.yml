@@ -1,0 +1,31 @@
+version: "3"
+services:
+  webapi:
+    extends:
+      file: docker-compose-prod.yml
+      service: webapi
+    command: npm run dev
+    volumes:
+      - ./webapi:/usr/app/webapi
+  framework-client:
+    extends:
+      file: docker-compose-prod.yml
+      service: framework-client
+    command: npm run dev
+    volumes:
+      - ./framework-client/src:/usr/app/framework-client/src
+  redis:
+    extends:
+      file: docker-compose-prod.yml
+      service: redis
+  selenium-hub:
+    extends:
+      file: docker-compose-prod.yml
+      service: selenium-hub
+  chrome:
+    extends:
+      file: docker-compose-prod.yml
+      service: chrome
+volumes:
+  redis:
+    driver: local

@@ -1,0 +1,30 @@
+// Test Cases columns
+TEST_SCENARIO_ID_COLUMN = "Test Scenario ID"
+SCENARIO_NAME_COLUMN = "Scenario Name"
+TEST_CASE_ID_COLUMN = "Test Case ID"
+STEP_COLUMN = "Steps"
+LABEL_COLUMN = "Label"
+
+PARAMETER_COLUMN = "Parameter"
+PARAMETER_TYPE_COLUMN = "Parameter Type"
+COMMAND_COLUMN = "Command"
+PREREQUISITES_COLUMN = "Prerequisites"
+EXPECTED_RESULT_COLUMN = "Should Be"
+
+// Reusables columns
+REUSABLE_FUNCTION_NAME_COLUMN = "Function Name"
+REUSABLE_PARAMETER_COLUMN = "Parameter"
+REUSABLE_PARAMETER_TYPE_COLUMN = "Parameter Type"
+REUSABLE_COMMAND_COLUMN = "Command"
+REUSABLE_SHOULD_BE_COLUMN = "Should Be"
+
+
+// Configuration columns
+CONFIGURATION_COMMAND_COLUMN = "Command"
+CONFIGURATION_KEY_COLUMN = "Key"
+CONFIGURATION_VALUE_COLUMN = "Value"
+
+// Output columns
+const OUTPUT_ACTUAL_RESULT_COLUMN = "Actually Is"
+const OUTPUT_STATUS_COLUMN = "Automation Status"
+const OUTPUT_SCREENSHOT_COLUMN = "Screenshot"

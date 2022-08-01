@@ -1,0 +1,24 @@
+name: QA Automation Deployment
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{  secrets.QA_AUTOMATION_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.QA_AUTOMATION_KNOWN_HOSTS }}
+
+      - name: Run deploy script
+        run: |
+          ssh azure-qa@40.78.145.27
+          cd ../../opt/qa_automation/qa-automation-tool
+          git pull origin main
+          echo "Deployment Start"
+          /bin/bash deploy.sh
+          echo "Deployment completed successfully!"

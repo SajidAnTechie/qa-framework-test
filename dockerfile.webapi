@@ -1,0 +1,10 @@
+FROM node:14-alpine
+
+RUN mkdir -p /usr/app/webapi
+
+WORKDIR /usr/app/webapi
+
+COPY ./webapi/package*.json ./
+RUN npm install
+
+COPY webapi .

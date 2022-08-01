@@ -1,0 +1,16 @@
+FROM node:14-alpine
+
+RUN mkdir -p /usr/app/qa-framework
+WORKDIR /usr/app/qa-framework
+
+COPY ./qa-framework ./
+RUN npm install
+RUN npm run build
+
+RUN mkdir -p /usr/app/framework-client
+WORKDIR /usr/app/framework-client
+
+COPY ./framework-client/package*.json ./
+RUN npm install
+
+COPY framework-client .

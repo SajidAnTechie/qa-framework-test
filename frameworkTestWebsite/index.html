@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Multi Step Form</title>
+      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+   </head>
+   <body>
+      <div class="container custom-scroll-bar">
+         <header>Signup Form</header>
+         <div class="progress-bar">
+            <div class="step">
+               <p>
+                  Name
+               </p>
+               <div class="bullet">
+                  <span>1</span>
+               </div>
+               <div class="check fas fa-check"></div>
+            </div>
+            <div class="step">
+               <p>
+                  Contact
+               </p>
+               <div class="bullet">
+                  <span>2</span>
+               </div>
+               <div class="check fas fa-check"></div>
+            </div>
+            <div class="step">
+               <p>
+                  Birth
+               </p>
+               <div class="bullet">
+                  <span>3</span>
+               </div>
+               <div class="check fas fa-check"></div>
+            </div>
+            <div class="step">
+               <p>
+                  Submit
+               </p>
+               <div class="bullet">
+                  <span>4</span>
+               </div>
+               <div class="check fas fa-check"></div>
+            </div>
+         </div>
+         <div class="form-outer">
+            <form action="#">
+               <div class="page slide-page-1">
+                  <div class="title" data-qa="basic-title">
+                     Basic Info:
+                  </div>
+                  <div class="field">
+                     <div class="label">
+                        First Name
+                     </div>
+                     <input data-qa="basic-firstName" type="text">
+                  </div>
+                  <div class="field">
+                    <div class="label">
+                       Middle Name
+                    </div>
+                    <input data-qa="basic-middleName" type="text">
+                 </div>
+                  <div class="field">
+                     <div class="label">
+                        Last Name
+                     </div>
+                     <input data-qa="basic-lastName" type="text">
+                  </div>
+                  <div class="field">
+                     <button data-qa="basic-next-button" class="firstNext next">Next</button>
+                  </div>
+               </div>
+               <div class="page slide-page-2">
+                  <div class="title">
+                     Contact Info:
+                  </div>
+                  <div class="field">
+                     <div class="label">
+                        Email Address
+                     </div>
+                     <input data-qa="contact-emailAddress" type="email">
+                  </div>
+                  <div class="field">
+                    <div class="label">
+                       Home Address
+                    </div>
+                    <input data-qa="contact-homeAddress" type="text">
+                 </div>
+                  <div class="field">
+                     <div class="label">
+                        Phone Number
+                     </div>
+                     <input data-qa="contact-phoneNumber" type="Number">
+                  </div>
+                  <div class="field btns">
+                     <button data-qa="contact-previous-button" class="prev-1 prev">Previous</button>
+                     <button data-qa="contact-next-button" class="next-1 next">Next</button>
+                  </div>
+               </div>
+               <div class="page slide-page-3">
+                  <div class="title">
+                     Date of Birth:
+                  </div>
+                  <div class="field">
+                     <div class="label">
+                        Year
+                     </div>
+                     <select data-qa="dob-year">
+                      <option value="" disabled selected>Year</option>
+                       <option>2000</option>
+                       <option>1996</option>
+                       <option>1995</option>
+                       <option>1990</option>
+                       <option>1988</option>
+                       <option>1985</option>
+                       <option>1982</option>
+                       <option>1980</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <div class="label">
+                       Month
+                    </div>
+                    <select data-qa="dob-month">
+                      <option value="" disabled selected>Month</option>
+                      <option>Jan</option>
+                      <option>Feb</option>
+                      <option>Mar</option>
+                      <option>April</option>
+                      <option>May</option>
+                      <option>Jun</option>
+                      <option>July</option>
+                      <option>Aug</option>
+                      <option>Sep</option>
+                      <option>Oct</option>
+                      <option>Nov</option>
+                      <option>Dec</option>
+                   </select>
+                 </div>
+                 <div class="field">
+                  <div class="label">
+                     Day
+                  </div>
+                  <select data-qa="dob-day">
+                    <option value="" disabled selected>Day</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                    <option>19</option>
+                    <option>20</option>
+                    <option>21</option>
+                    <option>22</option>
+                    <option>23</option>
+                    <option>24</option>
+                    <option>25</option>
+                    <option>26</option>
+                    <option>27</option>
+                    <option>28</option>
+                    <option>29</option>
+                    <option>30</option>
+                 </select>
+               </div>
+                  <div class="field">
+                     <div class="label">
+                        Gender
+                     </div>
+                     <select data-qa="dob-gender">
+                       <option value="" disabled selected>Select Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                     </select>
+                  </div>
+                  <div class="field">
+                     <div class="label">
+                     </div>
+                     <button data-qa="calculate-age">Calculate Age</button>
+                  </div>
+                  <div class="field">
+                     <div class="label">
+                        Total Age:
+                     </div>
+                     <p data-qa="total-age"></p>
+                  </div>
+                  <div class="field btns">
+                     <button data-qa="dob-previous-button" class="prev-2 prev">Previous</button>
+                     <button data-qa="dob-previous-next-button" class="next-2 next">Next</button>
+                  </div>
+               </div>
+               <div class="page slide-page-4">
+                  <div class="title">
+                     Login Details:
+                  </div>
+                  <div class="field">
+                     <div class="label">
+                        Username
+                     </div>
+                     <input data-qa="login-username" type="text">
+                  </div>
+                  <div class="field">
+                     <div class="label">
+                        Password
+                     </div>
+                     <input data-qa="login-password" type="password">
+                  </div>
+                  <div class="field" data-dyn-count="3" data-dyn-target-name="data-qa-login-term-condition">
+                    <div class="label">
+                       Terms & Condition
+                    </div>
+                        <input data-qa-login-term-condition-1="data-qa-login-term-condition-1" class="checkbox-input" type="checkbox" name="checkbox-1">term 1</input>
+                        <input data-qa-login-term-condition-2="data-qa-login-term-condition-2" class="checkbox-input" type="checkbox" name="checkbox-2">term 2</input>
+                        <input data-qa-login-term-condition-3="data-qa-login-term-condition-3" class="checkbox-input" type="checkbox" name="checkbox-3">term 3</input>
+                 </div>
+                  <div class="field btns">
+                     <button data-qa="login-previous-button" class="prev-3 prev">Previous</button>
+                     <button data-qa="login-submit-button" class="submit">Submit</button>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+      <script src="script.js"></script>
+   </body>
+</html>
