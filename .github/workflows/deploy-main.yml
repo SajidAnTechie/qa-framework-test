@@ -16,7 +16,10 @@ jobs:
 
       - name: Run deploy script
         run: |
-          cd qa-automation-tool
+          ssh root@40.78.145.27
+          cd ../..
+          cd /opt
+          cd ./qa_automation/qa-automation-tool
           git pull origin main
           echo "Deployment Start"
           /bin/bash deploy.sh
