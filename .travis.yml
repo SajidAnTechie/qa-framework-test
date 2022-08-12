@@ -1,0 +1,24 @@
+---
+arch: amd64
+dist: bionic
+branches:
+  only:
+    - master
+
+jobs:
+  include:
+    - name: QA automation
+      language: node_js
+      node_js:
+        - 14
+      install:
+        - curl -sf https://up.apex.sh/install | sudo sh
+        - curl -sf https://raw.githubusercontent.com/pratishshr/envault/master/install.sh | sudo sh
+      before_deploy:
+        - echo ${PRIVATE_KEY} >> ~/.ssh/id_rsa;
+        - echo ${KNOWN_HOST} >> ~/.ssh/known_hosts;
+      deploy:
+        provider: script
+        script: ssh azure-qa@40.78.145.27 \
+          /bin/bash /opt/qa_automation/qa-automation-tool/deploy.sh && \
+          echo "Deployment Successfully"
