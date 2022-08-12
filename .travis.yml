@@ -11,9 +11,9 @@ jobs:
       language: node_js
       node_js:
         - 14
-      install:
-        - curl -sf https://up.apex.sh/install | sudo sh
-        - curl -sf https://raw.githubusercontent.com/pratishshr/envault/master/install.sh | sudo sh
+      # install:
+      #   - curl -sf https://up.apex.sh/install | sudo sh
+      #   - curl -sf https://raw.githubusercontent.com/pratishshr/envault/master/install.sh | sudo sh
       before_deploy:
         - echo ${PRIVATE_KEY} >> ~/.ssh/id_rsa;
         - echo ${KNOWN_HOST} >> ~/.ssh/known_hosts;
