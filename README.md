@@ -1,6 +1,6 @@
 # QA AUTOMATION TOOL
 
-Documentation for the system can be found [here](docs/README.md);
+Documentation for the system can be found [here](docs/README.md)
 
 #
 
