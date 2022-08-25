@@ -1,0 +1,43 @@
+name: Comment
+on:
+  issues:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  auto-comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Diff revision
+        id: diff_rev
+        shell: bash
+        run: |
+          delta=$(git log)
+          delta="${delta//'%'/'%25'}"
+          delta="${delta//$'\n'/'%0A'}"
+          delta="${delta//$'\r'/'%0D'}"
+          echo "::set-output name=delta_code::$delta"
+
+      - name: Auto-comment
+        uses: wow-actions/auto-comment@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          issuesOpenedReactions: "+1"
+          issuesOpenedComment: |
+            :wave: @{{ author }}
+            Thank you for raising an issue. We will investigate into the matter and get back to you as soon as possible.
+            Please make sure you have given us as much context as possible.
+
+          pullRequestOpenedReactions: "hooray"
+          pullRequestOpenedComment: |
+            :wave: @{{ author }}
+            Thank you for raising your pull request.
+            ```
+              ${{ steps.diff_rev.outputs.delta_code }}
+
+            ```
+            Please make sure you have followed our contributing guidelines. We will review it as soon as possible
