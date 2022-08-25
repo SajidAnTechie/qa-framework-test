@@ -37,7 +37,7 @@ jobs:
             :wave: @{{ author }}
             Thank you for raising your pull request.
             ```
-              ${{ steps.diff_rev.outputs.delta_code }}
+            ${{ steps.diff_rev.outputs.delta_code }}
 
             ```
             Please make sure you have followed our contributing guidelines. We will review it as soon as possible
