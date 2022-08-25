@@ -19,7 +19,7 @@ jobs:
           delta=$(git log)
           delta="${delta//'%'/'%25'}"
           delta="${delta//$'\n'/'%0A'}"
-          delta="${delta//$'\r'/'%0D'}"
+          delta="${delta//$'\r'/'%Y-%m-%dT%H:%M:%S'}"
           echo "::set-output name=delta_code::$delta"
 
       - name: Auto-comment
