@@ -16,13 +16,13 @@ jobs:
 
       - name: Build container
         env:
-          REDIS_HOST: qa_automation_redis
-          REDIS_PORT: 6370
-          WEBAPI_PORT: 5001
-          WEBAPI_HOST: webapi
-          SELENIUM_MAX_INSTANCES: 2
-          SELENIUM_GRID_HOST: selenium-hub
-          SELENIUM_GRID_PORT: 4444
+          REDIS_HOST: ${{ secrets.REDIS_HOST }}
+          REDIS_PORT: ${{ secrets.REDIS_PORT }}
+          WEBAPI_PORT: ${{ secrets.WEBAPI_PORT }}
+          WEBAPI_HOST: ${{ secrets.WEBAPI_HOST }}
+          SELENIUM_MAX_INSTANCES: ${{ secrets.SELENIUM_MAX_INSTANCES }}
+          SELENIUM_GRID_HOST: ${{ secrets.SELENIUM_GRID_HOST }}
+          SELENIUM_GRID_PORT: ${{ secrets.SELENIUM_GRID_PORT }}
           ENABLE_SCREENSHOT: false
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           AZURE_STORAGE_PROVIDER: ${{ secrets.AZURE_STORAGE_PROVIDER }}
