@@ -1,0 +1,63 @@
+name: Run Test
+on:
+  pull_request:
+    branches:
+      - master
+
+  #Allow us to run this workflow manually from the action tab
+  workflow_dispatch:
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set environment variables
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_REDIS_HOST: ${{ secrets.REDIS_HOST }}
+          envkey_REDIS_PORT: ${{ secrets.REDIS_PORT }}
+          envkey_WEBAPI_PORT: ${{ secrets.WEBAPI_PORT }}
+          envkey_WEBAPI_HOST: ${{ secrets.WEBAPI_HOST }}
+          envkey_SELENIUM_MAX_INSTANCES: ${{ secrets.SELENIUM_MAX_INSTANCES }}
+          envkey_SELENIUM_GRID_HOST: ${{ secrets.SELENIUM_GRID_HOST }}
+          envkey_SELENIUM_GRID_PORT: ${{ secrets.SELENIUM_GRID_PORT }}
+          envkey_ENABLE_SCREENSHOT: false
+          envkey_NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          envkey_AZURE_STORAGE_PROVIDER: ${{ secrets.AZURE_STORAGE_PROVIDER }}
+          envkey_AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+          envkey_AZURE_STORAGE_CONTAINER_NAME: ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}
+          envkey_AZURE_STORAGE_MAX_FILE_SIZE: ${{ secrets.AZURE_STORAGE_MAX_FILE_SIZE }}
+          envkey_AZURE_STORAGE_KEY_NAME: ${{ secrets.AZURE_STORAGE_KEY_NAME }}
+          envkey_AZURE_STORAGE_BUCKET_NAME: ${{ secrets.AZURE_STORAGE_BUCKET_NAME }}
+          envkey_SENTRY_DNS: ${{ secrets.SENTRY_DNS }}
+          envkey_SENTRY_WEB_API_ENV: ${{ secrets.SENTRY_WEB_API_ENV }}
+          envkey_SENTRY_CLIENT_API_ENV: ${{ secrets.SENTRY_CLIENT_API_ENV }}
+          envkey_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
+      - name: Build container
+        run: |
+          sudo docker compose up --build -d
+
+      - name: Fetch test cases
+        id: testCases
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: "https://script.google.com/macros/s/AKfycbxXD4Mx0ADziDC9f2drat-6jDwHQMZ_2lq5Aw6BQpt9eXDuQQAWFJTDIEn1lXmUFPc8MQ/exec"
+          method: "GET"
+          timeout: 60000
+
+      - name: Show response
+        run: |
+          echo ${{ steps.testCases.outputs.response }}
+
+      - name: Run test cases
+        id: runTestCases
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: "http://127.0.0.1:5001/api/v1/test"
+          method: "POST"
+          data: ${{ steps.testCases.outputs.response }}
+          timeout: 60000
