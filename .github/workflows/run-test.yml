@@ -1,0 +1,57 @@
+name: Run Test
+on:
+  pull_request:
+    branches:
+      - master
+
+  #Allow us to run this workflow manually from the action tab
+  workflow_dispatch:
+
+jobs:
+  run-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build container
+        env:
+          REDIS_HOST: qa_automation_redis
+          REDIS_PORT: 6370
+          WEBAPI_PORT: 5001
+          WEBAPI_HOST: webapi
+          SELENIUM_MAX_INSTANCES: 2
+          SELENIUM_GRID_HOST: selenium-hub
+          SELENIUM_GRID_PORT: 4444
+          ENABLE_SCREENSHOT: false
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          AZURE_STORAGE_PROVIDER: ${{ secrets.AZURE_STORAGE_PROVIDER }}
+          AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+          AZURE_STORAGE_CONTAINER_NAME: ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}
+          AZURE_STORAGE_MAX_FILE_SIZE: ${{ secrets.AZURE_STORAGE_MAX_FILE_SIZE }}
+          AZURE_STORAGE_KEY_NAME: ${{ secrets.AZURE_STORAGE_KEY_NAME }}
+          AZURE_STORAGE_BUCKET_NAME: ${{ secrets.AZURE_STORAGE_BUCKET_NAME }}
+          SENTRY_DNS: ${{ secrets.SENTRY_DNS }}
+          SENTRY_WEB_API_ENV: ${{ secrets.SENTRY_WEB_API_ENV }}
+          SENTRY_CLIENT_API_ENV: ${{ secrets.SENTRY_CLIENT_API_ENV }}
+        run: |
+          sudo docker compose up --build
+
+      - name: Fetch test cases
+        id: testCases
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: "https://script.google.com/macros/s/AKfycbxXD4Mx0ADziDC9f2drat-6jDwHQMZ_2lq5Aw6BQpt9eXDuQQAWFJTDIEn1lXmUFPc8MQ/exec"
+          method: "GET"
+
+      - name: Show response
+        run: |
+          echo ${{ steps.testCases.outputs.response }}
+
+      - name: Run test cases
+        id: runTestCases
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: "http://127.0.0.1:5001/api/v1/test"
+          method: "POST"
+          data: ${{ steps.testCases.outputs.response }}
