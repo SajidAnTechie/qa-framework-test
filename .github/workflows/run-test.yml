@@ -39,7 +39,7 @@ jobs:
 
       - name: Build container
         run: |
-          sudo docker compose up --build
+          sudo docker compose up --build -d
 
       - name: Fetch test cases
         id: testCases
