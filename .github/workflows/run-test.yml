@@ -60,3 +60,4 @@ jobs:
           url: "http://127.0.0.1:5001/api/v1/test"
           method: "POST"
           data: ${{ steps.testCases.outputs.response }}
+          timeout: 60000
