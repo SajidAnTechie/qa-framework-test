@@ -47,7 +47,7 @@ jobs:
         with:
           url: "https://script.google.com/macros/s/AKfycbxXD4Mx0ADziDC9f2drat-6jDwHQMZ_2lq5Aw6BQpt9eXDuQQAWFJTDIEn1lXmUFPc8MQ/exec"
           method: "GET"
-          timeout: 10000
+          timeout: 60000
 
       - name: Show response
         run: |
